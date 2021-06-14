@@ -1,0 +1,121 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 56, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 48 )
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 56 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+position = Vector2( 128, 112 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/StaticBody2D"]
+margin_left = -56.0
+margin_top = -8.0
+margin_right = 56.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Node2D"]
+position = Vector2( 16, 96 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D2"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/StaticBody2D2"]
+margin_left = -56.0
+margin_top = -8.0
+margin_right = 56.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Node2D"]
+position = Vector2( 240, 96 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/StaticBody2D3"]
+margin_left = -56.0
+margin_top = -8.0
+margin_right = 56.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Node2D"]
+position = Vector2( 280, 80 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D4"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/StaticBody2D4"]
+margin_left = -56.0
+margin_top = -8.0
+margin_right = 56.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Node2D"]
+position = Vector2( -16, 80 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D5"]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/StaticBody2D5"]
+margin_left = -56.0
+margin_top = -8.0
+margin_right = 56.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D6"]
+position = Vector2( -24, 24 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D/StaticBody2D6"]
+position = Vector2( 280, 24 )
+shape = SubResource( 2 )

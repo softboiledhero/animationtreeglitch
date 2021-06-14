@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://player.png" type="Texture" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Jumping"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Running"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Standing"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="AnimationNodeTransition" id=4]
+input_count = 2
+input_0/name = "On Ground"
+input_0/auto_advance = false
+input_1/name = "In Air"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=5]
+input_count = 2
+input_0/name = "Standing"
+input_0/auto_advance = false
+input_1/name = "Running"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Jumping"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Running"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Standing"
+
+[sub_resource type="AnimationNodeBlendTree" id=9]
+graph_offset = Vector2( -400, -125 )
+nodes/AirState/node = SubResource( 4 )
+nodes/AirState/position = Vector2( 360, 60 )
+nodes/GroundState/node = SubResource( 5 )
+nodes/GroundState/position = Vector2( 140, 0 )
+nodes/Jumping/node = SubResource( 6 )
+nodes/Jumping/position = Vector2( -100, 180 )
+nodes/Running/node = SubResource( 7 )
+nodes/Running/position = Vector2( -140, 0 )
+nodes/Standing/node = SubResource( 8 )
+nodes/Standing/position = Vector2( -100, -120 )
+nodes/output/position = Vector2( 620, 100 )
+node_connections = [ "output", 0, "AirState", "AirState", 0, "GroundState", "AirState", 1, "Jumping", "GroundState", 0, "Standing", "GroundState", 1, "Running" ]
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 5, 8 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Jumping = SubResource( 1 )
+anims/Running = SubResource( 2 )
+anims/Standing = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/AirState/current = 0
+parameters/GroundState/current = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 10 )
